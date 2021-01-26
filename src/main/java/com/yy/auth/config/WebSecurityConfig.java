@@ -19,10 +19,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 放开以下路径：
+     * /rsa/publicKey：获取RSA公钥接口路径 
+     * /v2/api-docs、/webjars**、/swagger-resources**、/doc.html, api文档相关
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .antMatchers("/rsa/publicKey").permitAll().antMatchers("/v2/api-docs").permitAll().anyRequest()
+                .antMatchers("/rsa/publicKey").permitAll()
+                .antMatchers("/v2/api-docs").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/doc.html").permitAll()
+                .anyRequest()
                 .authenticated();
     }
 

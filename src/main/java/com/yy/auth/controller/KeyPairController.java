@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /*
@@ -18,13 +19,14 @@ import io.swagger.annotations.ApiOperation;
  *@ClassAuthor: tengYong
  *@Date: 2021-01-23 18:39:22
 */
-@ApiOperation(value = "获取RSA公钥")
+@Api(tags = "KeyPairController", description = "公钥管理")
 @RestController
 public class KeyPairController {
 
     @Autowired
     private KeyPair keyPair;
 
+    @ApiOperation("获取RSA公钥")
     @GetMapping("/rsa/publicKey")
     public Map<String, Object> getKey() {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();

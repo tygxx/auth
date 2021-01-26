@@ -19,6 +19,6 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder().apiBasePackage("com.yy.auth.controller").title("认证中心")
-                .description("认证中心相关接口文档").contactName("macro").version("1.0").enableSecurity(false).build();
+                .description("认证中心相关接口文档").contactName("ty").version("1.0").enableSecurity(true).build();
     }
 }

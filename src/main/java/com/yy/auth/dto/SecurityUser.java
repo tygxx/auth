@@ -19,6 +19,8 @@ import lombok.Data;
 @Data
 public class SecurityUser implements UserDetails {
 
+    private static final long serialVersionUID = -7040189987383667995L;
+    
     /**
      * ID
      */
