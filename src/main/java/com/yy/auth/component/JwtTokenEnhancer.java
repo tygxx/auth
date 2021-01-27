@@ -18,6 +18,10 @@ import org.springframework.stereotype.Component;
 */
 @Component
 public class JwtTokenEnhancer implements TokenEnhancer {
+
+    /**
+     * UserServiceImpl中loadUserByUsername方法走完到此，该方法走完后AuthController中的oAuth2AccessToken对象就有值了
+     */
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();

@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 放开以下路径：
-     * /rsa/publicKey：获取RSA公钥接口路径 
+     * /rsa/publicKey：允许获取公钥接口的访问
      * /v2/api-docs、/webjars**、/swagger-resources**、/doc.html, api文档相关
      */
     @Override

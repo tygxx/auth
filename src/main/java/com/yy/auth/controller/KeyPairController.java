@@ -15,11 +15,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /*
- *@Description: 获取RSA公钥接口
+ *@Description: 由于我们的网关服务需要RSA的公钥来验证签名是否合法，所以认证服务需要有个接口把公钥暴露出来
  *@ClassAuthor: tengYong
  *@Date: 2021-01-23 18:39:22
 */
-@Api(tags = "KeyPairController", description = "公钥管理")
+@Api(tags = "RSA公钥管理")
 @RestController
 public class KeyPairController {
 

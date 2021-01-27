@@ -24,10 +24,11 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
 import lombok.AllArgsConstructor;
 
-/**
- * 认证服务器配置
- * Created by macro on 2020/6/19.
- */
+/*
+ *@Description: 认证服务器配置
+ *@ClassAuthor: tengYong
+ *@Date: 2021-01-27 13:22:13
+*/
 @AllArgsConstructor
 @Configuration
 @EnableAuthorizationServer

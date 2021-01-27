@@ -28,7 +28,7 @@ import springfox.documentation.annotations.ApiIgnore;
  *@Date: 2021-01-23 15:42:06
 */
 @RestController
-@Api(tags = "AuthController", description = "认证中心登录认证")
+@Api(tags = "认证中心登录认证")
 @RequestMapping("/oauth")
 public class AuthController {
 

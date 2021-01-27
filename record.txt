@@ -1,0 +1,8 @@
+1、使用keytool生成RSA证书jwt.jks，复制到resource目录下，在JDK的bin目录下使用如下命令即可
+    keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
+
+2、创建UserServiceImpl类实现Spring Security的UserDetailsService接口，用于加载用户信息
+
+3、添加认证服务相关配置Oauth2ServerConfig，需要配置加载用户信息的服务UserServiceImpl及RSA的钥匙对KeyPair
+
+4、如果你想往JWT中添加自定义信息的话，比如说登录用户的ID，可以自己实现TokenEnhancer接口

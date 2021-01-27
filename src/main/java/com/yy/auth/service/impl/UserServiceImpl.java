@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserDetailsService {
     @Autowired
     private HttpServletRequest request;
 
+    /**
+     * 访问Oauth2获取token接口时，会先到此，该方法走完会到JwtTokenEnhancer中的enhance
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String clientId = request.getParameter("client_id");
