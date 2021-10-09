@@ -1,9 +1,9 @@
-package com.yy.auth.dto;
+package com.yy.ds.auth.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.yy.common.dto.UserDto;
+import com.yy.ds.common.dto.UserDto;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -54,7 +54,7 @@ public class SecurityUser implements UserDetails {
         this.setId(userDto.getId());
         this.setUsername(userDto.getUsername());
         this.setPassword(userDto.getPassword());
-        this.setEnabled(userDto.getStatus() == 1);
+        this.setEnabled(userDto.getEnabled());
         this.setClientId(userDto.getClientId());
         if (userDto.getRoles() != null) {
             authorities = new ArrayList<>();

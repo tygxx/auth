@@ -1,12 +1,15 @@
-package com.yy.auth.config;
+package com.yy.ds.auth.config;
 
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yy.auth.component.JwtTokenEnhancer;
-import com.yy.auth.service.impl.UserServiceImpl;
+import com.yy.ds.auth.component.JwtTokenEnhancer;
+import com.yy.ds.auth.properties.AuthConfigProperties;
+import com.yy.ds.auth.service.UserService;
+import com.yy.ds.common.constant.AuthConstant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -35,26 +38,29 @@ import lombok.AllArgsConstructor;
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserServiceImpl userDetailsService;
+    private final UserService userDetailsService;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenEnhancer jwtTokenEnhancer;
+
+    @Autowired
+    private AuthConfigProperties authConfigProperties;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("admin-app")
-                .secret(passwordEncoder.encode("123456"))
+                .withClient(AuthConstant.ADMIN_CLIENT_ID)
+                .secret(passwordEncoder.encode(authConfigProperties.getSecret()))
                 .scopes("all")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600*24)
-                .refreshTokenValiditySeconds(3600*24*7)
+                .accessTokenValiditySeconds(authConfigProperties.getAccessTokenValiditySeconds())
+                .refreshTokenValiditySeconds(authConfigProperties.getRefreshTokenValiditySeconds())
                 .and()
-                .withClient("portal-app")
-                .secret(passwordEncoder.encode("123456"))
+                .withClient(AuthConstant.PORTAL_CLIENT_ID)
+                .secret(passwordEncoder.encode(authConfigProperties.getSecret()))
                 .scopes("all")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600*24)
-                .refreshTokenValiditySeconds(3600*24*7);
+                .accessTokenValiditySeconds(authConfigProperties.getAccessTokenValiditySeconds())
+                .refreshTokenValiditySeconds(authConfigProperties.getRefreshTokenValiditySeconds());
     }
 
     @Override
@@ -85,8 +91,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public KeyPair keyPair() {
         //从classpath下的证书中获取秘钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
-        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), authConfigProperties.getSecret().toCharArray());
+        return keyStoreKeyFactory.getKeyPair("jwt", authConfigProperties.getSecret().toCharArray());
     }
 
 }

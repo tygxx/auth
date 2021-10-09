@@ -1,18 +1,18 @@
-package com.yy.auth.controller;
+package com.yy.ds.auth.controller;
 
 import java.security.Principal;
 import java.util.Map;
 
-import com.yy.auth.dto.Oauth2TokenDto;
-import com.yy.common.api.CommonResult;
-import com.yy.common.constant.AuthConstant;
+import com.yy.ds.auth.dto.Oauth2TokenDto;
+import com.yy.ds.common.api.CommonResult;
+import com.yy.ds.common.constant.AuthConstant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,8 +27,8 @@ import springfox.documentation.annotations.ApiIgnore;
  *@ClassAuthor: tengYong
  *@Date: 2021-01-23 15:42:06
 */
-@RestController
 @Api(tags = "认证中心登录认证")
+@RestController
 @RequestMapping("/oauth")
 public class AuthController {
 
@@ -42,7 +42,7 @@ public class AuthController {
             @ApiImplicitParam(name = "refresh_token", value = "刷新token"),
             @ApiImplicitParam(name = "username", value = "登录用户名"),
             @ApiImplicitParam(name = "password", value = "登录密码") })
-    @RequestMapping(value = "/token", method = RequestMethod.POST)
+    @PostMapping(value = "/token")
     public CommonResult<Oauth2TokenDto> postAccessToken(@ApiIgnore Principal principal,
             @ApiIgnore @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
         OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();

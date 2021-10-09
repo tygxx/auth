@@ -1,4 +1,4 @@
-package com.yy.auth.controller;
+package com.yy.ds.auth.controller;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPublicKey;

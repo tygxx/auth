@@ -1,5 +1,32 @@
+server:
+  port: 20005
+  
 spring:
-  profiles:
-    active: dev
   application:
     name: auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVERADDR:http://localhost:8848}
+      config:
+        server-addr: ${NACOS_SERVERADDR:http://localhost:8848}
+        file-extension: yaml
+feign:
+  httpclient:
+    enabled: false # 关闭 feign 对 httpclient 的使用并开启 okhttp
+  okhttp:
+    enabled: true
+    
+ribbon:
+  ConnectTimeout: 3000 #服务请求连接超时时间（毫秒）
+  ReadTimeout: 3000 #服务请求处理超时时间（毫秒）
+
+logging:
+  level:
+    root: info
+    com.yy.ds.auth: debug
+
+authconfig: # @ConfigurationProperties(prefix = "authconfig")的前缀不支持驼峰
+  secret: 123!@# # 认证中心制作jks证书时，指定的密码
+  accessTokenValiditySeconds: 86400 # 一天（ConfigurationProperties 不支持计算）
+  refreshTokenValiditySeconds: 604800 # 7天

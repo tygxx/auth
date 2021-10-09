@@ -1,4 +1,4 @@
-package com.yy.auth.dto;
+package com.yy.ds.auth.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;

@@ -1,9 +1,9 @@
-package com.yy.auth.component;
+package com.yy.ds.auth.component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yy.auth.dto.SecurityUser;
+import com.yy.ds.auth.dto.SecurityUser;
 
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
